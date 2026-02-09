@@ -17,7 +17,7 @@ function Header() {
       <nav className="nav-right">
         <a href="/galeria">Galería</a>
         <Link to="/sobre-nosotros">Sobre Nosotros</Link>
-        <a href="/contactanos">Contáctanos</a>
+        <Link to="/contactanos">Contáctanos</Link>
       </nav>
     </header>
   )
