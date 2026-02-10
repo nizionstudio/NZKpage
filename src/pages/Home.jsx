@@ -3,7 +3,29 @@ import Header from '../components/Header'
 import Footer from '../components/Footer'
 
 function Home() {
-  const [currentSlide, setCurrentSlide] = useState(0)
+  // Fotos del slider con extensiones reales
+  const slideFiles = [
+    '1.JPG',
+    '2.JPG',
+    '3.JPG',
+    '4.JPG',
+    '5.JPG',
+    '6.JPG',
+    '7.jpg',
+    '8.jpg',
+    '9.jpg',
+    '10.jpg',
+  ]
+
+  const slides = slideFiles.map((fileName, index) => ({
+    id: index + 1,
+    src: `/top10/${fileName}`,
+    alt: `NZK Eventos ${index + 1}`,
+  }))
+
+  const [currentSlide, setCurrentSlide] = useState(() =>
+    Math.floor(Math.random() * slides.length),
+  )
   const [copyToast, setCopyToast] = useState({
     visible: false,
     text: '',
@@ -47,25 +69,6 @@ function Home() {
     )
     return () => clearTimeout(timeoutId)
   }, [copyToast.visible])
-  
-  // Slides de ejemplo - puedes cambiar el contenido después
-  const slides = [
-    { 
-      id: 1, 
-      title: 'Estructuras y Cubiertas',
-      subtitle: 'Soluciones profesionales para tus eventos'
-    },
-    { 
-      id: 2, 
-      title: 'Mobiliario y Equipamiento',
-      subtitle: 'Todo lo que necesitas en un solo lugar'
-    },
-    { 
-      id: 3, 
-      title: 'Eventos Impecables',
-      subtitle: 'Calidad y profesionalismo en cada detalle'
-    },
-  ]
 
   const nextSlide = () => {
     setCurrentSlide((prev) => (prev + 1) % slides.length)
@@ -83,6 +86,57 @@ function Home() {
     return () => clearInterval(interval)
   }, [slides.length])
 
+  const steps = [
+    {
+      id: 1,
+      title: 'Contanos tu evento',
+      text: 'Escribinos por una red social y contanos qué servicio necesitás.',
+      photo: { src: '/armado/1.JPG', alt: 'Armado destacado 1', aspect: 'horizontal' },
+      photoSide: 'right',
+      arrowSide: 'left',
+    },
+    {
+      id: 2,
+      title: 'Lugar y horario',
+      text: 'Enviá ubicación, fecha y horario para cotizar correctamente.',
+      arrowSide: 'left',
+    },
+    {
+      id: 3,
+      title: 'Evaluamos el espacio',
+      text: 'Medimos y analizamos el lugar para asegurar instalación segura y prolija.',
+      photo: { src: '/armado/3.jpg', alt: 'Armado destacado 3', aspect: 'vertical' },
+      photoSide: 'left',
+      arrowSide: 'right',
+    },
+    {
+      id: 4,
+      title: 'Planificación',
+      text: 'Organizamos logística, materiales y tiempos de montaje.',
+    },
+    {
+      id: 5,
+      title: 'Montaje profesional',
+      text: 'Armamos todo cuidando estabilidad, presentación y seguridad.',
+      photo: { src: '/armado/2.JPG', alt: 'Armado destacado 2', aspect: 'horizontal' },
+      photoSide: 'right',
+      arrowSide: 'left',
+    },
+    {
+      id: 6,
+      title: 'Control de calidad',
+      text: 'Revisamos que todo quede firme y estéticamente impecable.',
+      arrowSide: 'left',
+    },
+    {
+      id: 7,
+      title: 'Retiro puntual',
+      text: 'Desmontamos en horario acordado y dejamos el lugar como estaba.',
+      photo: { src: '/armado/4.jpg', alt: 'Armado destacado 4', aspect: 'vertical' },
+      photoSide: 'left',
+    },
+  ]
+
   return (
     <>
       <Header />
@@ -94,10 +148,7 @@ function Home() {
               key={slide.id}
               className={`slide ${index === currentSlide ? 'active' : ''}`}
             >
-              <div className="slide-content">
-                <h2 className="slide-title">{slide.title}</h2>
-                <p className="slide-subtitle">{slide.subtitle}</p>
-              </div>
+              <img className="slide-image" src={slide.src} alt={slide.alt} />
             </div>
           ))}
         </div>
@@ -111,49 +162,64 @@ function Home() {
         <p>En NZK Eventos nos enfocamos en brindar un servicio de alta calidad en cada paso. Nuestro objetivo es que tu evento salga perfecto, por eso cuidamos cada detalle desde el primer contacto hasta el desmontaje final.</p>
       </div>
 
-      <div className="steps-section">
+      <div className="steps-section steps-section-vertical">
         <h2 className="steps-title">Así trabajamos</h2>
-        <div className="steps-path">
-          <div className="step-card">
-            <div className="step-number">1</div>
-            <h3>Contanos tu evento</h3>
-            <p>Escribinos por una red social y contanos qué servicio necesitás.</p>
-          </div>
-          <div className="step-arrow">→</div>
-          <div className="step-card">
-            <div className="step-number">2</div>
-            <h3>Lugar y horario</h3>
-            <p>Enviá ubicación, fecha y horario para cotizar correctamente.</p>
-          </div>
-          <div className="step-arrow">→</div>
-          <div className="step-card">
-            <div className="step-number">3</div>
-            <h3>Evaluamos el espacio</h3>
-            <p>Medimos y analizamos el lugar para asegurar instalación segura y prolija.</p>
-          </div>
-          <div className="step-arrow">→</div>
-          <div className="step-card">
-            <div className="step-number">4</div>
-            <h3>Planificación</h3>
-            <p>Organizamos logística, materiales y tiempos de montaje.</p>
-          </div>
-          <div className="step-arrow">→</div>
-          <div className="step-card">
-            <div className="step-number">5</div>
-            <h3>Montaje profesional</h3>
-            <p>Armamos todo cuidando estabilidad, presentación y seguridad.</p>
-          </div>
-          <div className="step-arrow">→</div>
-          <div className="step-card">
-            <div className="step-number">6</div>
-            <h3>Control de calidad</h3>
-            <p>Revisamos que todo quede firme y estéticamente impecable.</p>
-          </div>
-          <div className="step-arrow">→</div>
-          <div className="step-card">
-            <div className="step-number">7</div>
-            <h3>Retiro puntual</h3>
-            <p>Desmontamos en horario acordado y dejamos el lugar como estaba.</p>
+        <div className="steps-layout">
+          <div className="steps-path">
+            {steps.map((step, index) => {
+              const arrowId = `arrowhead-${step.id}`
+              const arrowSide = step.arrowSide || step.photoSide || 'right'
+              const curvePath =
+                arrowSide === 'left'
+                  ? 'M30 0 C10 25 10 75 30 100'
+                  : 'M30 0 C50 25 50 75 30 100'
+
+              return (
+                <div key={step.id} className="step-group">
+                  <div className={`step-row ${step.photoSide === 'left' ? 'reverse' : ''}`}>
+                    <div className="step-main">
+                      <div className="step-card">
+                        <div className="step-number">{step.id}</div>
+                        <div>
+                          <h3>{step.title}</h3>
+                          <p>{step.text}</p>
+                        </div>
+                      </div>
+                      {index < steps.length - 1 && (
+                        <div className="step-arrow step-arrow-vertical" aria-hidden="true">
+                          <svg viewBox="0 0 60 100" role="presentation">
+                            <defs>
+                              <marker
+                                id={arrowId}
+                                markerWidth="10"
+                                markerHeight="10"
+                                refX="5"
+                                refY="5"
+                                orient="auto"
+                              >
+                                <path d="M0 0 L10 5 L0 10 Z" className="step-arrow-head" />
+                              </marker>
+                            </defs>
+                            <path
+                              d={curvePath}
+                              className="step-arrow-line"
+                              markerEnd={`url(#${arrowId})`}
+                            />
+                          </svg>
+                        </div>
+                      )}
+                    </div>
+                    {step.photo ? (
+                      <figure className={`step-photo ${step.photo.aspect}`}>
+                        <img src={step.photo.src} alt={step.photo.alt} />
+                      </figure>
+                    ) : (
+                      <div className="step-photo step-photo-empty" aria-hidden="true" />
+                    )}
+                  </div>
+                </div>
+              )
+            })}
           </div>
         </div>
       </div>

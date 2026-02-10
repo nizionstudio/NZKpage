@@ -125,8 +125,42 @@ function Footer() {
 
           <div className="footer-column">
             <ul className="footer-social">
-              <li><a href="https://instagram.com" target="_blank" rel="noopener noreferrer">Instagram</a></li>
-              <li><a href="https://facebook.com" target="_blank" rel="noopener noreferrer">Facebook</a></li>
+              <li>
+                <a
+                  href="https://instagram.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Instagram"
+                >
+                  <svg
+                    className="social-icon instagram-icon"
+                    viewBox="0 0 24 24"
+                    role="img"
+                    aria-hidden="true"
+                  >
+                    <rect x="3.2" y="3.2" width="17.6" height="17.6" rx="5" />
+                    <circle cx="12" cy="12" r="4.2" />
+                    <circle cx="17.2" cy="6.8" r="1.2" fill="currentColor" />
+                  </svg>
+                  <span>Instagram</span>
+                </a>
+              </li>
+              <li>
+                <a
+                  href="https://facebook.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Facebook"
+                >
+                  <svg viewBox="0 0 24 24" role="img" aria-hidden="true">
+                    <path
+                      d="M13 9.5V8.3c0-.6.4-1 1-1h1.5V5H14c-2.2 0-3.5 1.4-3.5 3.4v1.1H9v2.6h1.5V19h2.8v-6.9H15l.4-2.6H13z"
+                      fill="currentColor"
+                    />
+                  </svg>
+                  <span>Facebook</span>
+                </a>
+              </li>
             </ul>
           </div>
         </div>
