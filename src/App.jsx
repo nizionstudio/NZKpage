@@ -4,6 +4,8 @@ import Home from './pages/Home'
 import Galeria from './pages/Galeria'
 import SobreNosotros from './pages/SobreNosotros'
 import Contactanos from './pages/Contactanos'
+import Terminos from './pages/Terminos'
+import Privacidad from './pages/Privacidad'
 
 function App() {
   return (
@@ -12,6 +14,8 @@ function App() {
       <Route path="/galeria" element={<Galeria />} />
       <Route path="/sobre-nosotros" element={<SobreNosotros />} />
       <Route path="/contactanos" element={<Contactanos />} />
+      <Route path="/terminos" element={<Terminos />} />
+      <Route path="/privacidad" element={<Privacidad />} />
     </Routes>
   )
 }

@@ -13,10 +13,7 @@ function SobreNosotros() {
         <div className="sobre-nosotros-content">
           <div className="sobre-nosotros-grid">
             <div className="sobre-nosotros-image-placeholder sobre-nosotros-image-large">
-              <div className="image-placeholder-content">
-                <span className="placeholder-icon">📷</span>
-                <span className="placeholder-text">Foto aquí</span>
-              </div>
+              <img src="/top10/12.jpeg" alt="Montaje NZK Eventos" />
             </div>
             
             <div className="sobre-nosotros-text">
@@ -32,10 +29,7 @@ function SobreNosotros() {
             </div>
 
             <div className="sobre-nosotros-image-placeholder sobre-nosotros-image-small">
-              <div className="image-placeholder-content">
-                <span className="placeholder-icon">📷</span>
-                <span className="placeholder-text">Foto aquí</span>
-              </div>
+              <img src="/top10/11.jpg" alt="Equipo NZK Eventos" />
             </div>
           </div>
         </div>

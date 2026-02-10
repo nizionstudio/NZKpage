@@ -147,7 +147,7 @@ function Footer() {
               </li>
               <li>
                 <a
-                  href="https://facebook.com"
+                  href="https://www.facebook.com/nzkeventos?locale=es_LA"
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label="Facebook"
