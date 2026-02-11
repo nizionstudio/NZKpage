@@ -127,7 +127,7 @@ function Footer() {
             <ul className="footer-social">
               <li>
                 <a
-                  href="https://instagram.com"
+                  href="https://www.instagram.com/nzkeventos.carpas"
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label="Instagram"
