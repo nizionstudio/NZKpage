@@ -1,9 +1,21 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+import { useLocation } from 'react-router-dom'
 import Header from '../components/Header'
 import Footer from '../components/Footer'
 
 function EstructurasCubiertas() {
+  const location = useLocation()
   const [selectedImage, setSelectedImage] = useState(null)
+  useEffect(() => {
+    if (!location.hash) return
+    const target = document.querySelector(location.hash)
+    if (!target) return
+    const timeoutId = setTimeout(() => {
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    }, 0)
+    return () => clearTimeout(timeoutId)
+  }, [location.hash])
+
   const [selectedItem, setSelectedItem] = useState(null)
   const [selectedIndex, setSelectedIndex] = useState(0)
   const phoneNumbers = ['+5493816667948', '+5493812000512']
@@ -131,7 +143,7 @@ function EstructurasCubiertas() {
         </div>
 
         <div className="catalogo-content">
-          <section className="catalogo-section">
+          <section className="catalogo-section" id="carpas">
             <h2 className="catalogo-section-title">Carpas</h2>
             <div className="catalogo-grid">
               {carpasItems.map((item) => (
@@ -164,7 +176,7 @@ function EstructurasCubiertas() {
             </div>
           </section>
 
-          <section className="catalogo-section">
+          <section className="catalogo-section" id="gazebos">
             <h2 className="catalogo-section-title">Gazebos</h2>
             <div className="catalogo-grid">
               {gazebosItems.map((item) => (
@@ -197,7 +209,7 @@ function EstructurasCubiertas() {
             </div>
           </section>
 
-          <section className="catalogo-section">
+          <section className="catalogo-section" id="cerramientos">
             <h2 className="catalogo-section-title">Cerramientos</h2>
             <div className="catalogo-grid">
               {cerramientosItemsWithPhone.map((item) => (
@@ -230,7 +242,7 @@ function EstructurasCubiertas() {
             </div>
           </section>
 
-          <section className="catalogo-section">
+          <section className="catalogo-section" id="caminerias">
             <h2 className="catalogo-section-title">Caminerias</h2>
             <div className="catalogo-grid">
               {camineriasItemsWithPhone.map((item) => (
@@ -263,7 +275,7 @@ function EstructurasCubiertas() {
             </div>
           </section>
 
-          <section className="catalogo-section">
+          <section className="catalogo-section" id="pisos">
             <h2 className="catalogo-section-title">Pisos</h2>
             <div className="catalogo-grid">
               {pisosItemsWithPhone.length === 0 ? (
@@ -350,10 +362,17 @@ function EstructurasCubiertas() {
                   ‹
                 </button>
                 <div className="catalogo-product-thumbs">
-                  {selectedItem.images.slice(0, 3).map((src) => (
-                    <span key={src} className="catalogo-thumb-preview">
+                  {selectedItem.images.slice(0, 3).map((src, index) => (
+                    <button
+                      key={src}
+                      type="button"
+                      className={`catalogo-thumb-preview ${
+                        index === selectedIndex ? 'catalogo-thumb-preview-active' : ''
+                      }`}
+                      onClick={() => setSelectedIndex(index)}
+                    >
                       <img src={src} alt={selectedItem.title} />
-                    </span>
+                    </button>
                   ))}
                 </div>
                 <button
