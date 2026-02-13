@@ -139,18 +139,19 @@ function Home() {
 
   return (
     <>
-      <Header />
-      
-      <div className="slider-container">
-        <div className="slider-wrapper">
-          {slides.map((slide, index) => (
-            <div
-              key={slide.id}
-              className={`slide ${index === currentSlide ? 'active' : ''}`}
-            >
-              <img className="slide-image" src={slide.src} alt={slide.alt} />
-            </div>
-          ))}
+      <div className="home-first-screen">
+        <Header />
+        <div className="slider-container">
+          <div className="slider-wrapper">
+            {slides.map((slide, index) => (
+              <div
+                key={slide.id}
+                className={`slide ${index === currentSlide ? 'active' : ''}`}
+              >
+                <img className="slide-image" src={slide.src} alt={slide.alt} />
+              </div>
+            ))}
+          </div>
         </div>
       </div>
 

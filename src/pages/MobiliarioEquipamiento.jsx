@@ -148,7 +148,11 @@ function MobiliarioEquipamiento() {
                       <button
                         type="button"
                         className="catalogo-thumb"
-                        onClick={() => setSelectedImage(item.images[0])}
+                        onClick={() => {
+                          setSelectedItem(item)
+                          setSelectedIndex(0)
+                          setSelectedImage(null)
+                        }}
                       >
                         <img src={item.images[0]} alt={item.title} loading="lazy" />
                       </button>
@@ -162,6 +166,7 @@ function MobiliarioEquipamiento() {
                         onClick={() => {
                           setSelectedItem(item)
                           setSelectedIndex(0)
+                          setSelectedImage(null)
                         }}
                       >
                         Ver producto
@@ -185,7 +190,11 @@ function MobiliarioEquipamiento() {
                       <button
                         type="button"
                         className="catalogo-thumb"
-                        onClick={() => setSelectedImage(item.images[0])}
+                        onClick={() => {
+                          setSelectedItem(item)
+                          setSelectedIndex(0)
+                          setSelectedImage(null)
+                        }}
                       >
                         <img src={item.images[0]} alt={item.title} loading="lazy" />
                       </button>
@@ -199,6 +208,7 @@ function MobiliarioEquipamiento() {
                         onClick={() => {
                           setSelectedItem(item)
                           setSelectedIndex(0)
+                          setSelectedImage(null)
                         }}
                       >
                         Ver producto
@@ -222,7 +232,11 @@ function MobiliarioEquipamiento() {
                       <button
                         type="button"
                         className="catalogo-thumb"
-                        onClick={() => setSelectedImage(item.images[0])}
+                        onClick={() => {
+                          setSelectedItem(item)
+                          setSelectedIndex(0)
+                          setSelectedImage(null)
+                        }}
                       >
                         <img src={item.images[0]} alt={item.title} loading="lazy" />
                       </button>
@@ -236,6 +250,7 @@ function MobiliarioEquipamiento() {
                         onClick={() => {
                           setSelectedItem(item)
                           setSelectedIndex(0)
+                          setSelectedImage(null)
                         }}
                       >
                         Ver producto
@@ -280,6 +295,7 @@ function MobiliarioEquipamiento() {
                 src={selectedItem.images[selectedIndex]}
                 alt={selectedItem.title}
                 className="catalogo-product-hero"
+                onClick={() => setSelectedImage('zoom')}
               />
               <div className="catalogo-product-controls">
                 <button
@@ -348,16 +364,56 @@ function MobiliarioEquipamiento() {
             type="button"
             className="catalogo-modal-close"
             aria-label="Cerrar imagen"
-            onClick={() => setSelectedImage(null)}
+            onClick={(event) => {
+              event.stopPropagation()
+              setSelectedImage(null)
+            }}
           >
             ✕
           </button>
-          <img
-            src={selectedImage}
-            alt="Vista ampliada"
-            className="catalogo-modal-image"
-            onClick={(event) => event.stopPropagation()}
-          />
+          {selectedItem ? (
+            <>
+              <button
+                type="button"
+                className="catalogo-nav catalogo-modal-nav catalogo-modal-nav-prev"
+                aria-label="Foto anterior"
+                onClick={(event) => {
+                  event.stopPropagation()
+                  setSelectedIndex((prev) =>
+                    prev === 0 ? selectedItem.images.length - 1 : prev - 1,
+                  )
+                }}
+              >
+                ‹
+              </button>
+              <img
+                src={selectedItem.images[selectedIndex]}
+                alt={selectedItem.title}
+                className="catalogo-modal-image"
+                onClick={(event) => event.stopPropagation()}
+              />
+              <button
+                type="button"
+                className="catalogo-nav catalogo-modal-nav catalogo-modal-nav-next"
+                aria-label="Foto siguiente"
+                onClick={(event) => {
+                  event.stopPropagation()
+                  setSelectedIndex((prev) =>
+                    prev === selectedItem.images.length - 1 ? 0 : prev + 1,
+                  )
+                }}
+              >
+                ›
+              </button>
+            </>
+          ) : (
+            <img
+              src={selectedImage}
+              alt="Vista ampliada"
+              className="catalogo-modal-image"
+              onClick={(event) => event.stopPropagation()}
+            />
+          )}
         </div>
       )}
       <Footer />
