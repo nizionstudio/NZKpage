@@ -2254,12 +2254,12 @@
   }
 
   .catalogo-item-media {
-    grid-template-columns: repeat(2, 1fr);
     width: 100%;
+    max-width: 100%;
   }
 
   .catalogo-item-media img {
-    height: 100px;
+    height: auto;
   }
 
   .catalogo-item {
