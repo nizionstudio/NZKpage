@@ -332,13 +332,13 @@ function Contactanos() {
                 <div className="contactanos-phone-item">
                   <p className="contactanos-phone-name">Ángel Vicente Niziolek</p>
                   <a 
-                    href="tel:+5493812000512" 
+                    href="tel:+5493814010512" 
                     className="contactanos-phone-link"
                   >
-                    +54 9 381 200-0512
+                    +54 9 381 401-0512
                   </a>
                   <a 
-                    href="https://wa.me/5493812000512" 
+                    href="https://wa.me/5493814010512" 
                     target="_blank"
                     rel="noopener noreferrer"
                     className="contactanos-whatsapp-link"

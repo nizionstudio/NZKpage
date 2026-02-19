@@ -67,13 +67,13 @@ function Footer() {
                 />
               </p>
               <p className="footer-phone">
-                <a href="tel:+5493812000512">+5493812000512</a>
+                <a href="tel:+5493814010512">+5493814010512</a>
                 <button
                   type="button"
                   className="copy-icon"
-                  aria-label="Copiar número +5493812000512"
+                  aria-label="Copiar número +5493814010512"
                   onClick={() =>
-                    handleCopy('+5493812000512', 'Número copiado al portapapeles')
+                    handleCopy('+5493814010512', 'Número copiado al portapapeles')
                   }
                 />
               </p>

@@ -8,7 +8,7 @@ function MobiliarioEquipamiento() {
   const [selectedImage, setSelectedImage] = useState(null)
   const [selectedItem, setSelectedItem] = useState(null)
   const [selectedIndex, setSelectedIndex] = useState(0)
-  const phoneNumbers = ['+5493816667948', '+5493812000512']
+  const phoneNumbers = ['+5493816667948', '+5493814010512']
 
   const livingItems = [
     {
@@ -37,7 +37,7 @@ function MobiliarioEquipamiento() {
     {
       title: 'Juego de Gervasoni y sillones individuales',
       description: 'Juego de Gervasoni y sillones individuales para 5 personas',
-      whatsappNumber: '+5493812000512',
+      whatsappNumber: '+5493814010512',
       images: ['/mobiliario/8.JPG'],
     },
     {
@@ -63,7 +63,7 @@ function MobiliarioEquipamiento() {
       title: 'Cañones de calor',
       description:
         'Cañones de aire caliente, ideal para grandes espacios no muy abiertos ya que es calor dinámico (en movimiento) incluyen la garrafa correspondiente',
-      whatsappNumber: '+5493812000512',
+      whatsappNumber: '+5493814010512',
       images: ['/mobiliario/a7.jpg', '/mobiliario/a8.jpg', '/mobiliario/a9.jpg'],
     },
     {

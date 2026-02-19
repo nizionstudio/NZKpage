@@ -18,7 +18,7 @@ function EstructurasCubiertas() {
 
   const [selectedItem, setSelectedItem] = useState(null)
   const [selectedIndex, setSelectedIndex] = useState(0)
-  const phoneNumbers = ['+5493816667948', '+5493812000512']
+  const phoneNumbers = ['+5493816667948', '+5493814010512']
   const items = [
     {
       title: 'Carpa blanca 8 x 11',
