@@ -31,6 +31,7 @@ function Home() {
     text: '',
     type: 'success',
   })
+  const [isMobileSteps, setIsMobileSteps] = useState(false)
 
   const handleCopy = (text, message) => {
     const showToast = (text, type = 'success') => {
@@ -69,6 +70,18 @@ function Home() {
     )
     return () => clearTimeout(timeoutId)
   }, [copyToast.visible])
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (typeof window !== 'undefined') {
+        setIsMobileSteps(window.innerWidth <= 600)
+      }
+    }
+
+    handleResize()
+    window.addEventListener('resize', handleResize)
+    return () => window.removeEventListener('resize', handleResize)
+  }, [])
 
   const nextSlide = () => {
     setCurrentSlide((prev) => (prev + 1) % slides.length)
@@ -137,6 +150,14 @@ function Home() {
     },
   ]
 
+  // Configuración para mobile: qué flechas llevan foto y de qué paso
+  const mobileArrowPhotoMap = {
+    0: { side: 'left', fromStep: 0 },  // Flecha 1 usa foto del paso 1
+    1: { side: 'right', fromStep: 2 }, // Flecha 2 usa foto del paso 3
+    3: { side: 'left', fromStep: 4 },  // Flecha 4 usa foto del paso 5
+    4: { side: 'right', fromStep: 6 }, // Flecha 5 usa foto del paso 7
+  }
+
   return (
     <>
       <div className="home-first-screen">
@@ -170,54 +191,127 @@ function Home() {
             {steps.map((step, index) => {
               const arrowId = `arrowhead-${step.id}`
               const arrowSide = step.arrowSide || step.photoSide || 'right'
-              const curvePath =
-                arrowSide === 'left'
-                  ? 'M30 0 C10 25 10 75 30 100'
-                  : 'M30 0 C50 25 50 75 30 100'
+              const curvePath = isMobileSteps
+                ? 'M30 0 L30 100'
+                : arrowSide === 'left'
+                    ? 'M30 0 C10 25 10 75 30 100'
+                    : 'M30 0 C50 25 50 75 30 100'
+
+              let leftPhoto = null
+              let rightPhoto = null
+
+              if (isMobileSteps && index < steps.length - 1) {
+                const config = mobileArrowPhotoMap[index]
+                if (config) {
+                  const sourceStep = steps[config.fromStep]
+                  const photo = sourceStep && sourceStep.photo
+                  if (photo) {
+                    if (config.side === 'left') leftPhoto = photo
+                    if (config.side === 'right') rightPhoto = photo
+                  }
+                }
+              }
 
               return (
                 <div key={step.id} className="step-group">
-                  <div className={`step-row ${step.photoSide === 'left' ? 'reverse' : ''}`}>
-                    <div className="step-main">
-                      <div className="step-card">
-                        <div className="step-number">{step.id}</div>
-                        <div>
-                          <h3>{step.title}</h3>
-                          <p>{step.text}</p>
+                  {isMobileSteps ? (
+                    <div className="step-row">
+                      <div className="step-main">
+                        <div className="step-card">
+                          <div className="step-number">{step.id}</div>
+                          <div>
+                            <h3>{step.title}</h3>
+                            <p>{step.text}</p>
+                          </div>
                         </div>
-                      </div>
-                      {index < steps.length - 1 && (
-                        <div className="step-arrow step-arrow-vertical" aria-hidden="true">
-                          <svg viewBox="0 0 60 100" role="presentation">
-                            <defs>
-                              <marker
-                                id={arrowId}
-                                markerWidth="10"
-                                markerHeight="10"
-                                refX="5"
-                                refY="5"
-                                orient="auto"
+                        {index < steps.length - 1 && (
+                          <div className="step-arrow-mobile-wrapper">
+                            {leftPhoto && (
+                              <figure
+                                className={`step-photo step-photo-inline left ${
+                                  leftPhoto.aspect || ''
+                                }`}
                               >
-                                <path d="M0 0 L10 5 L0 10 Z" className="step-arrow-head" />
-                              </marker>
-                            </defs>
-                            <path
-                              d={curvePath}
-                              className="step-arrow-line"
-                              markerEnd={`url(#${arrowId})`}
-                            />
-                          </svg>
+                                <img src={leftPhoto.src} alt={leftPhoto.alt} />
+                              </figure>
+                            )}
+                            <div className="step-arrow step-arrow-vertical" aria-hidden="true">
+                              <svg viewBox="0 0 60 100" role="presentation">
+                                <defs>
+                                  <marker
+                                    id={arrowId}
+                                    markerWidth="10"
+                                    markerHeight="10"
+                                    refX="5"
+                                    refY="5"
+                                    orient="auto"
+                                  >
+                                    <path d="M0 0 L10 5 L0 10 Z" className="step-arrow-head" />
+                                  </marker>
+                                </defs>
+                                <path
+                                  d={curvePath}
+                                  className="step-arrow-line"
+                                  markerEnd={`url(#${arrowId})`}
+                                />
+                              </svg>
+                            </div>
+                            {rightPhoto && (
+                              <figure
+                                className={`step-photo step-photo-inline right ${
+                                  rightPhoto.aspect || ''
+                                }`}
+                              >
+                                <img src={rightPhoto.src} alt={rightPhoto.alt} />
+                              </figure>
+                            )}
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                  ) : (
+                    <div className={`step-row ${step.photoSide === 'left' ? 'reverse' : ''}`}>
+                      <div className="step-main">
+                        <div className="step-card">
+                          <div className="step-number">{step.id}</div>
+                          <div>
+                            <h3>{step.title}</h3>
+                            <p>{step.text}</p>
+                          </div>
                         </div>
+                        {index < steps.length - 1 && (
+                          <div className="step-arrow step-arrow-vertical" aria-hidden="true">
+                            <svg viewBox="0 0 60 100" role="presentation">
+                              <defs>
+                                <marker
+                                  id={arrowId}
+                                  markerWidth="10"
+                                  markerHeight="10"
+                                  refX="5"
+                                  refY="5"
+                                  orient="auto"
+                                >
+                                  <path d="M0 0 L10 5 L0 10 Z" className="step-arrow-head" />
+                                </marker>
+                              </defs>
+                              <path
+                                d={curvePath}
+                                className="step-arrow-line"
+                                markerEnd={`url(#${arrowId})`}
+                              />
+                            </svg>
+                          </div>
+                        )}
+                      </div>
+                      {step.photo ? (
+                        <figure className={`step-photo ${step.photo.aspect}`}>
+                          <img src={step.photo.src} alt={step.photo.alt} />
+                        </figure>
+                      ) : (
+                        <div className="step-photo step-photo-empty" aria-hidden="true" />
                       )}
                     </div>
-                    {step.photo ? (
-                      <figure className={`step-photo ${step.photo.aspect}`}>
-                        <img src={step.photo.src} alt={step.photo.alt} />
-                      </figure>
-                    ) : (
-                      <div className="step-photo step-photo-empty" aria-hidden="true" />
-                    )}
-                  </div>
+                  )}
                 </div>
               )
             })}

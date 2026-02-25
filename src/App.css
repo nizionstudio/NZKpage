@@ -911,16 +911,38 @@
     height: 100px;
   }
 
+  .steps-section-vertical .step-main {
+    align-items: center;
+  }
+
+  .step-arrow-mobile-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    margin-top: 0.4rem;
+  }
+
+  .step-photo.step-photo-inline {
+    margin: 0;
+    width: 120px;
+    max-width: 120px;
+    padding: 0;
+    background: transparent;
+    border: none;
+    box-shadow: none;
+  }
+
   .step-photo {
-    max-width: 140px;
+    max-width: 70px;
   }
 
   .step-photo.horizontal {
-    max-width: 160px;
+    max-width: 80px;
   }
 
   .step-photo.vertical {
-    max-width: 120px;
+    max-width: 60px;
   }
 
   .step-photo {
